@@ -16,19 +16,19 @@ A cross-platform Go application that monitors serial ports for URLs and automati
 ### Windows (PowerShell - Run as Administrator)
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-windows.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/crbnos/serial/main/scripts/install-windows.ps1 | iex
 ```
 
 ### macOS (Terminal)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-mac.sh | bash
+curl -fsSL https://raw.githubusercontent.com/crbnos/serial/main/scripts/install-mac.sh | bash
 ```
 
 ### Linux (Terminal)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-linux.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/crbnos/serial/main/scripts/install-linux.sh | sudo bash
 ```
 
 ## What the Installation Does
@@ -133,7 +133,7 @@ sudo systemctl restart serial-scanner
 If you prefer to build from source:
 
 ```bashcrbnos/serial
-git clone https://github.com/barbinbrad/serial-url-scanner.git
+git clone https://github.com/crbnos/serial.git
 cd serial-url-scanner
 go build -o serial-scanner main.go
 ```
