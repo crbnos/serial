@@ -4,31 +4,30 @@ A cross-platform Go application that monitors serial ports for URLs and automati
 
 ## Features
 
-- =
-  Monitors all available serial ports automatically
-- < Detects URLs in serial data using regex pattern matching
-- =� Opens URLs in the default browser across Windows, macOS, and Linux
-- =� Runs as a background service/daemon on startup
-- =� Zero-configuration installation with one-line installers
-- =' Self-contained executable with no external dependencies
+- 🔍 Monitors all available serial ports automatically
+- 🔗 Detects URLs in serial data using regex pattern matching
+- 🌐 Opens URLs in the default browser across Windows, macOS, and Linux
+- 🚀 Runs as a background service/daemon on startup
+- ⚡ Zero-configuration installation with one-line installers
+- 📦 Self-contained executable with no external dependencies
 
 ## Quick Installation
 
 ### Windows (PowerShell - Run as Administrator)
 
-```powershellcrbnos/serial
+```powershell
 iwr -useb https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-windows.ps1 | iex
 ```
 
 ### macOS (Terminal)
 
-```bashcrbnos/serial
+```bash
 curl -fsSL https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-mac.sh | bash
 ```
 
 ### Linux (Terminal)
 
-```bashcrbnos/serial
+```bash
 curl -fsSL https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-linux.sh | sudo bash
 ```
 
@@ -50,7 +49,7 @@ The scanner continuously:
 
 1. Detects all available serial ports on the system
 2. Monitors each port for incoming data (9600 baud, 8N1 by default)
-3. Scans received text for URL patterns (`http://` or `https://`)
+3. Scans received text for URL patterns (`http://localhost` or `carbon.ms`)
 4. Validates found URLs and opens them in the default browser
 5. Logs all activity for debugging purposes
 
