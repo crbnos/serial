@@ -1,0 +1,93 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: linux
+            arch: amd64
+            output: serial-scanner-linux-amd64
+          - os: linux
+            arch: arm64
+            output: serial-scanner-linux-arm64
+          - os: darwin
+            arch: amd64
+            output: serial-scanner-darwin-amd64
+          - os: darwin
+            arch: arm64
+            output: serial-scanner-darwin-arm64
+          - os: windows
+            arch: amd64
+            output: serial-scanner-windows-amd64.exe
+          - os: windows
+            arch: arm64
+            output: serial-scanner-windows-arm64.exe
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+
+      - name: Build
+        env:
+          GOOS: ${{ matrix.os }}
+          GOARCH: ${{ matrix.arch }}
+          CGO_ENABLED: 0
+        run: |
+          go build -ldflags="-s -w" -o ${{ matrix.output }} .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.output }}
+          path: ${{ matrix.output }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for dir in serial-scanner-*/; do
+            filename="${dir%/}"
+            filepath="$dir$filename"
+
+            echo "Uploading $filepath"
+
+            gh release upload ${{ github.ref_name }} "$filepath" \
+              --clobber \
+              --repo ${{ github.repository }}
+          done
