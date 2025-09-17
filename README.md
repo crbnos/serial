@@ -4,27 +4,31 @@ A cross-platform Go application that monitors serial ports for URLs and automati
 
 ## Features
 
-- = Monitors all available serial ports automatically
+- =
+  Monitors all available serial ports automatically
 - < Detects URLs in serial data using regex pattern matching
-- =¥ Opens URLs in the default browser across Windows, macOS, and Linux
-- =€ Runs as a background service/daemon on startup
-- =æ Zero-configuration installation with one-line installers
+- =ï¿½ Opens URLs in the default browser across Windows, macOS, and Linux
+- =ï¿½ Runs as a background service/daemon on startup
+- =ï¿½ Zero-configuration installation with one-line installers
 - =' Self-contained executable with no external dependencies
 
 ## Quick Installation
 
 ### Windows (PowerShell - Run as Administrator)
-```powershell
+
+```powershellcrbnos/serial
 iwr -useb https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-windows.ps1 | iex
 ```
 
 ### macOS (Terminal)
-```bash
+
+```bashcrbnos/serial
 curl -fsSL https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-mac.sh | bash
 ```
 
 ### Linux (Terminal)
-```bash
+
+```bashcrbnos/serial
 curl -fsSL https://raw.githubusercontent.com/barbinbrad/serial-url-scanner/main/scripts/install-linux.sh | sudo bash
 ```
 
@@ -43,6 +47,7 @@ The one-liner installation scripts automatically:
 ## How It Works
 
 The scanner continuously:
+
 1. Detects all available serial ports on the system
 2. Monitors each port for incoming data (9600 baud, 8N1 by default)
 3. Scans received text for URL patterns (`http://` or `https://`)
@@ -58,6 +63,7 @@ The scanner continuously:
 ## Serial Port Configuration
 
 The scanner uses these default serial settings:
+
 - Baud Rate: 9600
 - Data Bits: 8
 - Stop Bits: 1
@@ -70,16 +76,19 @@ These settings work with most QR code scanners and barcode readers. If you need 
 ### View Logs
 
 **Windows:**
+
 ```powershell
 Get-Content "$env:ProgramData\SerialURLScanner\scanner.log" -Tail 50 -Wait
 ```
 
 **macOS:**
+
 ```bash
 tail -f ~/.serial-scanner/scanner.log
 ```
 
 **Linux:**
+
 ```bash
 sudo journalctl -u serial-scanner -f
 ```
@@ -87,6 +96,7 @@ sudo journalctl -u serial-scanner -f
 ### Service Management
 
 **Windows:**
+
 ```powershell
 # Check status
 Get-ScheduledTask -TaskName "SerialURLScanner"
@@ -97,6 +107,7 @@ Start-ScheduledTask -TaskName "SerialURLScanner"
 ```
 
 **macOS:**
+
 ```bash
 # Check status
 launchctl list | grep serialscanner
@@ -107,6 +118,7 @@ launchctl start com.barbinbrad.serialscanner
 ```
 
 **Linux:**
+
 ```bash
 # Check status
 sudo systemctl status serial-scanner
@@ -121,7 +133,7 @@ sudo systemctl restart serial-scanner
 
 If you prefer to build from source:
 
-```bash
+```bashcrbnos/serial
 git clone https://github.com/barbinbrad/serial-url-scanner.git
 cd serial-url-scanner
 go build -o serial-scanner main.go
@@ -130,12 +142,14 @@ go build -o serial-scanner main.go
 ## Uninstallation
 
 **Windows:**
+
 ```powershell
 Unregister-ScheduledTask -TaskName "SerialURLScanner" -Confirm:$false
 Remove-Item -Recurse -Force "$env:ProgramData\SerialURLScanner"
 ```
 
 **macOS:**
+
 ```bash
 launchctl unload ~/Library/LaunchAgents/com.barbinbrad.serialscanner.plist
 rm ~/Library/LaunchAgents/com.barbinbrad.serialscanner.plist
@@ -143,6 +157,7 @@ rm -rf ~/.serial-scanner
 ```
 
 **Linux:**
+
 ```bash
 sudo systemctl stop serial-scanner
 sudo systemctl disable serial-scanner

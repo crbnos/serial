@@ -16,7 +16,7 @@ echo -e "${CYAN}=========================================${NC}"
 
 # Configuration
 APP_NAME="SerialURLScanner"
-DOWNLOAD_BASE_URL="https://github.com/barbinbrad/serial-url-scanner/releases/latest/download"
+DOWNLOAD_BASE_URL="https://github.com/crbnos/serial/releases/latest/download"
 INSTALL_DIR="$HOME/.serial-scanner"
 EXE_NAME="serial-scanner"
 EXE_PATH="$INSTALL_DIR/$EXE_NAME"

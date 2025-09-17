@@ -8,7 +8,7 @@ Write-Host "=========================================" -ForegroundColor Cyan
 
 # Configuration
 $appName = "SerialURLScanner"
-$downloadBaseUrl = "https://github.com/barbinbrad/serial-url-scanner/releases/latest/download"
+$downloadBaseUrl = "https://github.com/crbnos/serial/releases/latest/download"
 $installDir = "$env:ProgramData\$appName"
 $exeName = "serial-scanner.exe"
 $exePath = "$installDir\$exeName"
